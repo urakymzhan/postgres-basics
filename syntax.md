@@ -2,25 +2,27 @@
 
 # POSTGRES terminal commands
 
-1.way to connect to DB => psql -h localhost -p 5432 -U <yourUserName> <db_name>
+1. way to connect to DB => psql -h localhost -p 5432 -U <yourUserName> <db_name>
 2. way to connect to DB => run psql from terminal then run \c <db_name> 
 
-\? - all info
-\l - list of databases
-\dt - show tables
-\d table_name - more detailed table info
-\x - expanded display is on
+- \? - all info
+- \l - list of databases
+- \dt - show tables
+- \d table_name - more detailed table info
+- \x - expanded display is on
 
-
+```
 CREATE DATABASE db_name;
 DROP DATABASE db_name; => be careful
 CREATE TABLE tb_name;
 DROP TABLE tb_name; => be careful
 INSERT INTO tb_name (values, ...) VALUES (values, ...)
 SELECT * FROM tb_name;
+```
 
 => More random examples: 
 
+```
 SELECT * FROM tb_name ORDER BY <column_name> ASC;
 
 SELECT * FROM tb_name ORDER BY <column_name> DESC;
@@ -59,9 +61,11 @@ SELECT <country_of_birth>, COUNT(*) FROM tb_name GROUP BY <country_of_birth> ORD
 <!-- https://www.postgresql.org/docs/9.5/functions-aggregate.html -->
 
 SELECT <country_of_birth>, COUNT(*) FROM tb_name GROUP BY <country_of_birth> HAVING COUNT(*) > 5 ORDER BY <country_of_birth> -> statistics, aggregation and filtering. HAVING used with GROUP BY and should come before ORDER BY
+``` 
+
 
 ## arithmetic operations
-
+```
 SELECT MAX(<price>) FROM tb_name;
 
 SELECT MIN(<price>) FROM tb_name;
@@ -94,49 +98,55 @@ ALTER TABLE tb_name ADD CONSTRAINT unique_email_address UNIQUE (email); -> make 
 ALTER TABLE tb_name DROP CONSTRAINT unique_email_address UNIQUE (email); 
 
 ALTER TABLE tb_name ADD CONSTRAINT gender_contstraint CHECK(gender == 'Female' OR gender = 'Male'); -> only allow Female and Male genders
+```
 
 ## delete
-
+```
 DELETE * FROM tb_name; -> be careful
 
 DELETE FROM tb_name WHERE id = 1;
 
 DELETE FROM tb_name WHERE id = 1;
+```
 
 ## update and more
-
+```
 UPDATE person SET email = "test@test.com" WHERE id = 1;
 
 UPDATE person SET first_name = 'Neo', email = "test@test.com" WHERE id = 1;
 
 ON CONFLICT (id) DO NOTHING; -> handle duplicate key, email etc. errors
-
+```
 
 ## foreign keys and joins
 ## relationships between tables
 
+```
 UDPATE person SET car_id = 2 WHERE id = 1;
+```
 
-# inner joins
-
+## inner joins
+```
 SELECT * FROM person
 JOIN car ON person.car_id = car.id;
 
 SELECT person.first_name, car.make FROM person
 JOIN car ON person.car_id = car.id;
+```
 
-# left joins
-
+## left joins
+```
 SELECT * FROM person
 LEFT JOIN car ON person.car_id = car.id;
 
 SELECT * FROM person
 LEFT JOIN car ON person.car_id = car.id
 WHERE car.* IS NULL;
-
+```
 ## export to csv
+```
 \copy(SELECT * FROM person LEFT JOIN car ON person.car_id = car.id) TO '/Users/ulan/Desktop/results.csv' DELIMETER ',' CSV HEADER;
-
+```
 ## we can also use functions etc...
 ## for more check documentation or run \? 
 
