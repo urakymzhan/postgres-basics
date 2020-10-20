@@ -147,8 +147,8 @@ WHERE car.* IS NULL;
 ```
 \copy(SELECT * FROM person LEFT JOIN car ON person.car_id = car.id) TO '/Users/ulan/Desktop/results.csv' DELIMETER ',' CSV HEADER;
 ```
-## we can also use functions etc...
-## for more check documentation or run \? 
+#### we can also use functions etc...
+#### for more check documentation or run \? 
 
 
 
